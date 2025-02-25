@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  title: Backend API
+  description: Clear specifications for API Documentation
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+    description: Local Server
+
+paths:
+  /upload:
+    post:
+      summary: Upload CSV file for processing
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The CSV file to upload
+      responses:
+        201:
+          description: CSV uploaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  requestId:
+                    type: string
+        400:
+          description: Invalid request
+
+  /status/{requestId}:
+    get:
+      summary: Get processing status by request ID
+      parameters:
+        - in: path
+          name: requestId
+          required: true
+          schema:
+            type: string
+          description: Unique ID for the processing request
+      responses:
+        200:
+          description: Successfully retrieved status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    requestId:
+                      type: string
+                    status:
+                      type: string
+                    outputImages:
+                      type: array
+                      items:
+                        type: string
+        404:
+          description: Request not found
+
+  /download/{requestId}:
+    get:
+      summary: Download CSV of processed request
+      parameters:
+        - in: path
+          name: requestId
+          required: true
+          schema:
+            type: string
+          description: Unique ID for the processing request
+      responses:
+        200:
+          description: CSV file downloaded successfully
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        404:
+          description: Request not found
+
+components:
+  schemas:
+    Worker:
+      type: object
+      description: Description of asynchronous worker functions responsible for processing images.
+      properties:
+        mongoDocId:
+          type: string
+          description: Unique MongoDB document identifier
+        inputImages:
+          type: array
+          items:
+            type: string
+          description: URLs of images to be processed
+        outputImages:
+          type: array
+          items:
+            type: string
+          description: URLs of processed images
+        status:
+          type: string
+          description: Processing status (Pending, Completed)
