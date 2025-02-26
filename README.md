@@ -12,6 +12,9 @@ After cloning the repository, navigate to the root directory and run:
 ### OR Setup everything in one command
   `npm run setup`
 
+##Swagger Docs
+
+![Alt Text](/src/Img/Swagger.png)
 
 
 # Backend API Documentation
