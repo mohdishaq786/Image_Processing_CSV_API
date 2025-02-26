@@ -4,8 +4,11 @@ info:
   description: Clear specifications for API Documentation
   version: 1.0.0
 servers:
+    servers:
+  - url: https://image-processing-csv-api.onrender.com
+    description: Production server
   - url: http://localhost:3001
-    description: Local Server
+    description: Development server
 
 paths:
   /upload:
