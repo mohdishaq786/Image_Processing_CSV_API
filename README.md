@@ -24,7 +24,7 @@ This API provides functionalities to upload CSV files, check the processing stat
 
 ### Server
 
-- **Base URL:** `- url: https://image-processing-csv-api.onrender.com
+- **Base URL:** `- url: https://image-processing-csv-api-iqhi.onrender.com
     description: Production server
   - url: http://localhost:5000
     description: Development server`
