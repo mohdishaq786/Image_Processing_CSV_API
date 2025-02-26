@@ -4,7 +4,6 @@ info:
   description: Clear specifications for API Documentation
   version: 1.0.0
 servers:
-    servers:
   - url: https://image-processing-csv-api-f0ss.onrender.com
     description: Production server
   - url: http://localhost:5000
